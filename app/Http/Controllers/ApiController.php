@@ -20,7 +20,7 @@ class ApiController extends Controller
         $requestMethod = $this->request->method();
 
         if (!$requestUrl) {
-            return response()->json(api_error(ApiCode::REQUEST_ERROR));
+            return response('404');
         }
         $configArr = explode('/', $requestUrl);
         $gatewayMethod = strtoupper($configArr[0]);
@@ -28,8 +28,8 @@ class ApiController extends Controller
         $controllerName = 'App\\Http\\Controllers\\' . explode('@', $configArr[1])[0] . 'Controller';
         $controllerMethod = explode('@', $configArr[1])[1];
 
-        if ($requestMethod != $gatewayMethod) {
-            return response()->json(api_error(ApiCode::REQUEST_ERROR));
+        if ($gatewayMethod != 'ANY' && $requestMethod != $gatewayMethod) {
+            return response('404');
         }
 
         return app($controllerName)->{$controllerMethod}();

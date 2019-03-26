@@ -8,7 +8,6 @@
 
 return [
     'homeland' => 'get/Home@index',
-
-
-    'login' => 'get/Auth@login',
+    'login' => 'any/Auth@login',
+    'register' => 'any/Auth@register',
 ];

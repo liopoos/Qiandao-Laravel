@@ -33,4 +33,19 @@ return [
         realpath(storage_path('framework/views'))
     ),
 
+    /*
+    |--------------------------------------------------------------------------
+    | View Title
+    |--------------------------------------------------------------------------
+    |
+    |  Custom Views Title.
+    |
+    */
+
+    'title' => [
+        'login' => 'login',
+    ],
+
+    'prefix' => 'qiandao', //class prefix
+
 ];

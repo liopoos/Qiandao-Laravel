@@ -25,3 +25,4 @@ Route::group([], function ($router) {
         'uses' => 'ApiController@gateway'
     ]);
 });
+
