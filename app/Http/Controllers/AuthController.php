@@ -20,11 +20,11 @@ class AuthController extends Controller
     {
         if ($this->request->method() == 'POST') {
             $validator = Validator::make($this->request->all(), [
-                'email' => 'bail|required|email|max:255|exists:user_list',
+                'email' => 'bail|required|email|max:255|exists:user_list,email',
                 'password' => 'required|max:64|min:8',
             ], [
                 'email.required' => '电子邮箱地址是必须的',
-                'email.exists' => '电子邮箱地址不存在，请先<a href="register">注册</a>',
+                'email.exists' => '电子邮箱地址不存在，请先注册',
                 'password.required' => '密码是必须的',
                 'password.max' => '密码最长不能超过64位',
                 'password.min' => '密码至少需要8位'
@@ -33,7 +33,7 @@ class AuthController extends Controller
             $credentials = $this->request->only('email', 'password');
 
             if (Auth::attempt($credentials)) {
-                return 'success';
+                return redirect('homeland');
             }
 
             return 'fail';
@@ -63,5 +63,10 @@ class AuthController extends Controller
         } else {
             return view('auth.register');
         }
+    }
+
+    public function logout()
+    {
+        Auth::logout();
     }
 }

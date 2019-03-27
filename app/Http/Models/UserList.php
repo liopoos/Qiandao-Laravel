@@ -8,11 +8,13 @@
 
 namespace App\Http\Models;
 
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-use Illuminate\Database\Eloquent\Model;
-
-class UserList extends Model
+class UserList extends Authenticatable
 {
+    use Notifiable;
     protected $table = 'user_list';
 
     protected $fillable = [

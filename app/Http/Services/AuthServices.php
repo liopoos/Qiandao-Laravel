@@ -14,11 +14,6 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthServices
 {
-    public function login()
-    {
-
-    }
-
     public static function register($validator)
     {
         $emailExists = UserList::query()->where('email', $validator['email'])->count();
