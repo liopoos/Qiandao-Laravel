@@ -40,6 +40,21 @@ class TemplateServices
         return $templateId;
     }
 
+    public static function getTemplateList($userId = 0)
+    {
+        $list = TemplateList::query()->where('is_valid', 1);
+
+        if ($userId) {
+            $list->where('uid', $userId);
+        } else {
+            $list->where('is_publish', 1);
+        }
+
+        $list = $list->get(['tid', 'name', 'description', 'created_at', 'used_number']);
+
+        return $list;
+    }
+
     public static function getTemplateDetail($id)
     {
         $tempLate = [];
@@ -52,7 +67,7 @@ class TemplateServices
         $headerReplaceContent = json_decode($data['header_replace'], 1);
         $queryReplaceContent = json_decode($data['query_replace'], 1);
         $postReplaceContent = json_decode($data['post_replace'], 1);
-
+        $tempLate['tid'] = $data['tid'];
         $tempLate['name'] = $data['name'];
         $tempLate['desc'] = $data['description'];
         $tempLate['requestUrl'] = $data['request_url'];

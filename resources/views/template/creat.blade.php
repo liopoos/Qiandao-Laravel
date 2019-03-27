@@ -1,4 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.narrow')
+
+@section('title','创建模板')
 
 @section('content')
     @if ($errors->any())
@@ -50,7 +52,7 @@
                       rows="4"
                       style="resize:none"></textarea>
         </div>
-        <button type="submit" class="btn btn-default">提交</button>
+        <button type="submit" class="btn btn-default btn-block">提交</button>
     </form>
 
 @endsection

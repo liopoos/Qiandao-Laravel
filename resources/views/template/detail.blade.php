@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.narrow')
 
 @section('sidebar')
     @parent
@@ -13,8 +13,10 @@
     <div class="template-bd">
         <h3>请求地址</h3>
         <ul class="list-group">
-            <li class="list-group-item">{{$requestUrl}}<span class="badge">{{$requestMethod}}</span></li>
+            <li class="list-group-item">{{$requestUrl}}</li>
         </ul>
+        <h3>请求方式</h3>
+        <span class="label label-default">{{$requestMethod}}</span>
         <h3>请求Header</h3>
         @component('component.listItem',['data'=>$headers])
         @endcomponent

@@ -33,7 +33,7 @@ class AuthController extends Controller
             $credentials = $this->request->only('email', 'password');
 
             if (Auth::attempt($credentials)) {
-                return redirect('homeland');
+                return redirect('dashboard');
             }
 
             return 'fail';
@@ -59,7 +59,7 @@ class AuthController extends Controller
 
             $userInfo = AuthServices::register($validator);
 
-            return redirect('homeland');;
+            return redirect('dashboard');
         } else {
             return view('auth.register');
         }
