@@ -14,7 +14,7 @@
         <h3>请求方式</h3>
         <span class="label label-default">{{$requestMethod}}</span>
         <h3>请求Header</h3>
-        @component('component.listInput',['data'=>$headers,'prefix'=>'header'])
+        @component('component.listInput',['data'=>$headers,'prefix'=>'headers'])
         @endcomponent
 
         <h3>请求Query / GET</h3>

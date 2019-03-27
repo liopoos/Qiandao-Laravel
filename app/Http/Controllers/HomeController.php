@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Services\HomeServices;
 use App\Http\Services\TemplateServices;
 use Illuminate\Http\Request;
 
@@ -32,5 +33,12 @@ class HomeController extends Controller
         $list = TemplateServices::getTemplateList();
 
         return view('template.list', ['list' => $list]);
+    }
+
+    public function do()
+    {
+        $task = HomeServices::doTask();
+
+        return $task;
     }
 }

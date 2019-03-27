@@ -28,7 +28,7 @@ class UserController extends Controller
         if ($this->request->method() == 'POST') {
             $data = $this->request->all();
             $taskId = UserServices::addTask($id, $data);
-            if($taskId){
+            if ($taskId) {
 
             }
         } else {
@@ -37,4 +37,12 @@ class UserController extends Controller
             return view('user.add', $data);
         }
     }
+
+    public function log($id = 0)
+    {
+        $logList = UserServices::getTaskLog($id);
+
+        return $logList;
+    }
+
 }

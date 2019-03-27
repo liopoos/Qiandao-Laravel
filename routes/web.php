@@ -21,10 +21,12 @@ Route::get('logout', 'AuthController@logout');
 Route::any('register', 'AuthController@register');
 
 Route::get('list', 'HomeController@list');
+Route::get('do', 'HomeController@do');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('dashboard', 'UserController@dashboard');
     Route::any('creat', 'TemplateController@creat');
     Route::get('template/{id}', 'TemplateController@detail');
     Route::any('add/{id}', 'UserController@add');
+    Route::get('log/{id?}', 'UserController@log');
 });

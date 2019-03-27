@@ -1,6 +1,7 @@
 @if(empty($data))
     <p>无</p>
 @endif
+<input type="hidden" class="form-control" name="{{$prefix}}-Blank">
 @foreach ($data as $item)
     <div class="form-group">
         <label>{{$item['name']}}</label>

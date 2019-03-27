@@ -9,13 +9,17 @@
 namespace App\Http\Models;
 
 
-class TaskLog
+use Illuminate\Database\Eloquent\Model;
+
+class TaskLog extends Model
 {
+    public $timestamps = false;
+
     protected $table = 'task_log';
 
     protected $primaryKey = 'log_id';
 
     protected $fillable = [
-        'task_id', 'executed_at', 'is_success'
+        'task_id', 'executed_at', 'is_success', 'response'
     ];
 }
