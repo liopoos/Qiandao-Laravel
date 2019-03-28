@@ -7,8 +7,12 @@
     margin: 0 0 0 0;
 }
 
-.template-btn{
+.template-btn {
     padding: 0 0 30px 0;
+}
+
+.dashboard-item {
+    margin-bottom: 60px;
 }
 
 /**rewrite**/

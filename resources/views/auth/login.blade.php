@@ -1,5 +1,5 @@
 @extends('layouts.wide')
-
+@section('title','登录')
 @section('content')
     @if ($errors->any())
         @foreach ($errors->all() as $error)

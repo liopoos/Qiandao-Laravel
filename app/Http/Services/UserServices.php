@@ -37,18 +37,67 @@ class UserServices
         return $taskId;
     }
 
-    public static function getTaskLog($tid)
+    /**
+     * 获取任务日志
+     * @param $tid
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public static function getTaskLog($taskId)
     {
         $userId = auth()->id();
         $logList = TaskList::query()
             ->where('task_list.uid', $userId)
-            ->join('task_log', 'task_list.task_id', '=', 'task_log.task_id');
-        if ($tid) {
-            $logList->where('task_list.tid', $tid);
+            ->join('task_log', 'task_list.task_id', '=', 'task_log.task_id')
+            ->join('template_list', 'task_list.tid', '=', 'template_list.tid');
+        if ($taskId) {
+            $logList->where('task_list.task_id', $taskId);
         }
         $logList->orderBy('task_log.executed_at', 'DESC');
         $logList = $logList->get();
 
         return $logList;
     }
+
+    /**
+     * 获取任务列表
+     * @param $userId
+     * @return array
+     */
+    public static function getTaskList($userId)
+    {
+        $list = TaskList::query()->where('task_list.uid', $userId)
+            ->join('template_list', 'template_list.tid', '=', 'task_list.tid')
+            ->join('task_log', 'task_log.task_id', '=', 'task_list.task_id')
+            ->where('task_list.is_delete', 0)
+            ->where('task_log.is_success', 1)
+            ->orderBy('task_log.executed_at', 'DESC')
+            ->get()->toArray();
+        foreach ($list as &$item) {
+            $item['successCount'] = TaskLog::query()->where('is_success', 1)->where('task_id', $item['task_id'])->count();
+            $item['failCount'] = TaskLog::query()->where('is_success', 0)->where('task_id', $item['task_id'])->count();
+        }
+
+        return $list;
+    }
+
+    public static function getTaskDetail($userId, $taskId)
+    {
+        $data = TaskList::find($taskId);
+
+        $taskData = [];
+        $taskData['creatTime'] = date('Y-m-d H:i:s', $data['created_at']);
+        $taskData['taskId'] = $data['task_id'];
+
+        $templateData = TemplateServices::getTemplateDetail($data['tid']);
+
+        foreach (json_decode($data['replace_content'], 1) as $keys => $items) {
+            foreach ($items as $key => $item) {
+                $taskData['replaceContent'][$keys][$key] = $item;
+            }
+        }
+        $templateData['task'] = $taskData;
+
+        return $templateData;
+    }
+
 }

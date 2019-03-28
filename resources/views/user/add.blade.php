@@ -1,8 +1,9 @@
 @extends('layouts.narrow')
 
+@section('title','新建'.$name.'任务')
 @section('content')
     <div class="page-header">
-        <h1>新建<strong>{{$name}}</strong></h1>
+        <h1>新建<strong>{{$name}}</strong>任务</h1>
     </div>
 
     <form action="/add/{{$tid}}" method="post">
@@ -33,7 +34,7 @@
 @endsection
 
 @section('sidebar')
-    <h5><strong>{{$name}}</strong>中需要替换的字段：</h5>
+    <h5>⚠️ <strong>{{$name}}</strong>中需要替换的字段：</h5>
     <p>Header</p>
     <ul>
         @foreach($headers as $item)

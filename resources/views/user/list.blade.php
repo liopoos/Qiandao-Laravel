@@ -2,8 +2,7 @@
 
 @section('content')
     <div class="page-header">
-        <h1>模板列表
-            <small>所以公开的模板列表</small>
+        <h1>我的模板列表
         </h1>
     </div>
     <ul class="list-group">

@@ -22,4 +22,14 @@ class TaskLog extends Model
     protected $fillable = [
         'task_id', 'executed_at', 'is_success', 'response'
     ];
+
+    public function getExecutedAtAttribute($value)
+    {
+        return date('Y-m-d H:i:s', $value);
+    }
+
+    public function getIsSuccessAttribute($value)
+    {
+        return $value == 1 ? '成功' : '失败';
+    }
 }

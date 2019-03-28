@@ -13,6 +13,11 @@ use App\Http\Models\TemplateList;
 
 class TemplateServices
 {
+    /**
+     * 创建模板
+     * @param $validator
+     * @return mixed
+     */
     public static function creatTemplate($validator)
     {
         $harContent = json_decode($validator['har-text'], 1);
@@ -23,7 +28,10 @@ class TemplateServices
 
         $requestMethod = $harContent['log']['entries'][0]['request']['method'];
         $requestUrl = $harContent['log']['entries'][0]['request']['url'];
-
+        $postType = '';
+        if (!empty($harContent['log']['entries'][0]['request']['postData'])) {
+            $postType = $harContent['log']['entries'][0]['request']['postData']['mimeType'];
+        }
         $templateId = TemplateList::insertGetId([
             'name' => $validator['template-name'],
             'description' => $validator['template-desc'],
@@ -33,13 +41,20 @@ class TemplateServices
             'post_replace' => $postReplaceContent,
             'request_method' => $requestMethod,
             'request_url' => $requestUrl,
+            'post_type' => $postType,
             'success_response' => $successResponseContent,
-            'created_at' => time()
+            'created_at' => time(),
+            'uid' => auth()->id()
         ]);
 
         return $templateId;
     }
 
+    /**
+     * 获取模板列表
+     * @param int $userId
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+     */
     public static function getTemplateList($userId = 0)
     {
         $list = TemplateList::query()->where('is_valid', 1);
@@ -50,11 +65,16 @@ class TemplateServices
             $list->where('is_publish', 1);
         }
 
-        $list = $list->get(['tid', 'name', 'description', 'created_at', 'used_number']);
+        $list = $list->get(['tid', 'name', 'description', 'created_at', 'used_number', 'is_publish']);
 
         return $list;
     }
 
+    /**
+     * 获取模板的详细信息
+     * @param $id
+     * @return array
+     */
     public static function getTemplateDetail($id)
     {
         $tempLate = [];
@@ -72,7 +92,7 @@ class TemplateServices
         $tempLate['desc'] = $data['description'];
         $tempLate['requestUrl'] = $data['request_url'];
         $tempLate['requestMethod'] = $data['request_method'];
-
+        $tempLate['postType'] = $data['post_type'];
         foreach ($harContent['log']['entries'][0]['request']['headers'] as $item) {
             $tempLate['headers'][] = [
                 'name' => $item['name'],

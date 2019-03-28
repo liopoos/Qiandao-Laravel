@@ -13,6 +13,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+Route::get('/', 'HomeController@index');
 Route::get('index', 'HomeController@index');
 Route::any('login', [
     'as' => 'login', 'uses' => 'AuthController@login'
@@ -29,4 +30,5 @@ Route::middleware(['auth'])->group(function () {
     Route::get('template/{id}', 'TemplateController@detail');
     Route::any('add/{id}', 'UserController@add');
     Route::get('log/{id?}', 'UserController@log');
+    Route::get('task/{id}', 'UserController@task');
 });

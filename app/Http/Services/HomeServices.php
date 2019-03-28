@@ -32,6 +32,11 @@ class HomeServices
         return $taskList;
     }
 
+    /**
+     * 开始请求
+     * @param $taskData
+     * @return bool
+     */
     public static function request($taskData)
     {
         $templateData = TemplateServices::getTemplateDetail($taskData['tid']);
@@ -41,43 +46,58 @@ class HomeServices
         $headers = self::getReplace('headers', $templateData, $taskReplaceContent['headers']);
         $query = self::getReplace('query', $templateData, $taskReplaceContent['query']);
         $post = self::getReplace('post', $templateData, $taskReplaceContent['post']);
-        $client = new Client();
+
+        $client = new Client([
+            'timeout' => 20,
+        ]);
+
         $task = new TaskLog;
         $task->task_id = $taskData['task_id'];
         $task->executed_at = time();
+        $requestMethod = strtoupper($templateData['requestMethod']);
+        $formData = [
+            'headers' => $headers,
+            'query' => $query
+        ];
+
+        if ($requestMethod != 'GET') {
+            if ($templateData['postType'] == 'application/x-www-form-urlencoded') {
+                $formData['form_params'] = $post;
+            } elseif ($templateData['postType'] == 'application/json') {
+                $formData['json'] = $post;
+            }
+        }
         try {
-            $response = $client->request(
-                strtoupper($templateData['requestMethod']),
-                $templateData['requestUrl'], [
-                'headers' => $headers,
-//                'query' => $query,
-//                'form_params' => $post
-            ]);
+            $response = $client->request($requestMethod, $templateData['requestUrl'], $formData);
             $code = $response->getStatusCode();
         } catch (GuzzleException $e) {
-            $code = 0;
+            $code = $e->getCode();
         }
-
-        return $code;
 
         if ($code == 200) {
             $body = $response->getBody()->getContents();
-            $task->response = 0;
+            $task->response = $body;
             $result = self::checkResponse($templateData['successResponse'], $body);
             if ($result) {
                 $task->is_success = 1;
             } else {
                 $task->is_success = 0;
             }
-
         } else {
+            $task->response = $e->getMessage();
             $task->is_success = 0;
         }
         $task->save();
 
-        return $result;
+        return $result ? '执行成功' : '执行失败';
     }
 
+    /**
+     * 检查response是否成功
+     * @param $templateResponse
+     * @param $response
+     * @return bool
+     */
     public static function checkResponse($templateResponse, $response)
     {
         try {
@@ -94,6 +114,13 @@ class HomeServices
         return $result;
     }
 
+    /**
+     * 替换请求的数据
+     * @param $type
+     * @param $templateData
+     * @param $taskData
+     * @return array
+     */
     public static function getReplace($type, $templateData, $taskData)
     {
         $replace = [];
