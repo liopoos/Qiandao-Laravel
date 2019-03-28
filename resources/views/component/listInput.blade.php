@@ -1,5 +1,7 @@
 @if(empty($data))
-    <p>无</p>
+    <li class="list-group-item">
+        <p>无</p>
+    </li>
 @endif
 <input type="hidden" class="form-control" name="{{$prefix}}-Blank">
 @foreach ($data as $item)

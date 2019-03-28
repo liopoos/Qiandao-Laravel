@@ -77,7 +77,7 @@ class HomeServices
         if ($code == 200) {
             $body = $response->getBody()->getContents();
             $task->response = $body;
-            $result = self::checkResponse($templateData['successResponse'], $body);
+            $result = self::checkResponse($templateData['successResponse'], $body, $templateData['relation']);
             if ($result) {
                 $task->is_success = 1;
             } else {
@@ -98,7 +98,7 @@ class HomeServices
      * @param $response
      * @return bool
      */
-    public static function checkResponse($templateResponse, $response)
+    public static function checkResponse($templateResponse, $response, $relation)
     {
         try {
             $response = json_decode($response, 1);
@@ -108,7 +108,12 @@ class HomeServices
 
         $result = true;
         foreach ($templateResponse as $item) {
-            $result &= ($response[$item['name']] == $item['value']) ? true : false;
+            //根据响应关系判断
+            if ($relation == 1) {
+                $result &= (($response[$item['name']] == $item['value']) ? true : false);
+            } elseif ($relation == 2) {
+                $result |= (($response[$item['name']] == $item['value']) ? true : false);
+            }
         }
 
         return $result;

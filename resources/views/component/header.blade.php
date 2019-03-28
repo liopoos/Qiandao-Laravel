@@ -25,7 +25,7 @@
                                aria-haspopup="true"
                                aria-expanded="false">个人中心 <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="/creat">新建模板</a></li>
+                                <li><a href="/creat">创建模板</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li><a href="/dashboard">仪表盘</a></li>
                                 <li><a href="/log">日志</a></li>

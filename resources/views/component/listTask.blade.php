@@ -5,10 +5,10 @@
         @foreach ($data as $item)
 
             @if($item['is_replace'])
-                <li class="list-group-item list-group-item-danger">
+                <li class="list-group-item">
                     <p>
-                        <strong>{{$item['name']}}</strong>:
-                        {{$replace[$item['name']]}}
+                        <strong style="color: red">{{$item['name']}}</strong>:
+                        <strong>{{$replace[$item['name']]}}</strong>
                     </p>
                 </li>
             @else

@@ -1,6 +1,6 @@
 @extends('layouts.wide')
 
-@section('title','仪表板');
+@section('title','仪表板')
 
 @section('content')
     <div class="dashboard-item">

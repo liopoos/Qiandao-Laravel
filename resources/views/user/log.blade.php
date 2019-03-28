@@ -1,6 +1,6 @@
 @extends('layouts.wide')
 
-@section('title',$title.'日志');
+@section('title',$title.'日志')
 
 @section('content')
     <div class="page-header">

@@ -1,13 +1,15 @@
 <ul class="list-group">
     @if(empty($data))
-        <p>无</p>
+        <li class="list-group-item">
+            <p>无</p>
+        </li>
     @else
         @foreach ($data as $item)
             <li class="list-group-item">
                 <p>
                     <strong>{{$item['name']}}</strong>:
                     @if($item['is_replace'])
-                        <code>{{$item['name']}}</code>
+                        <kbd>{{$item['name']}}</kbd>
                     @else
                         {{$item['value']}}
                     @endif

@@ -22,7 +22,9 @@
             <li class="list-group-item">{{$requestUrl}}</li>
         </ul>
         <h3>请求方式</h3>
-        <span class="label label-default">{{$requestMethod}}</span>
+        <li class="list-group-item">
+            {{$requestMethod}}
+        </li>
         <h3>请求Header</h3>
         @component('component.listTask',['data'=>$headers,'replace'=>$task['replaceContent']['headers']])
         @endcomponent
@@ -44,6 +46,11 @@
                 </p>
             </li>
         @endforeach
+
+        <h3>关系</h3>
+        <li class="list-group-item">
+            {{$relation == 1?'所有的条件都需要满足 [&运算]':'只需要其中一个条件满足 [|运算]'}}
+        </li>
     </div>
 
 

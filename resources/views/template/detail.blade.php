@@ -16,7 +16,9 @@
             <li class="list-group-item">{{$requestUrl}}</li>
         </ul>
         <h3>请求方式</h3>
-        <span class="label label-default">{{$requestMethod}}</span>
+        <li class="list-group-item">
+            {{$requestMethod}}
+        </li>
         <h3>请求Header</h3>
         @component('component.listItem',['data'=>$headers])
         @endcomponent
@@ -38,10 +40,14 @@
                 </p>
             </li>
         @endforeach
+        <h3>关系</h3>
+        <li class="list-group-item">
+            {{$relation == 1?'所有的条件都需要满足 [&运算]':'只需要其中一个条件满足 [|运算]'}}
+        </li>
     </div>
 @endsection
 
 @section('sidebar')
-    <p>⚠️ <code>Cookie</code>等样式字段需要在创建模板时替换。</p>
+    <p>⚠️ <kbd>Cookie</kbd>等样式字段需要在创建模板时替换。</p>
     <a href="/add/{{$tid}}" class="btn btn-default btn-block">创建任务</a>
 @endsection

@@ -25,6 +25,7 @@ class TemplateController extends Controller
                 'query-replace' => 'json',
                 'post-replace' => 'json',
                 'success-response' => 'required|json',
+                'relation' => 'required',
             ], [
                 'template-name.required' => '名称是必须的',
                 'template-desc.required' => '描述是必须的',
@@ -38,7 +39,7 @@ class TemplateController extends Controller
             ])->validate();
             $templateId = TemplateServices::creatTemplate($validator);
             if ($templateId) {
-                echo $templateId;
+                return redirect("/template/{$templateId}");
             }
         } else {
             return view('template.creat');

@@ -10,6 +10,7 @@ namespace App\Http\Services;
 
 
 use App\Http\Models\TemplateList;
+use Illuminate\Contracts\Support\Arrayable;
 
 class TemplateServices
 {
@@ -44,7 +45,8 @@ class TemplateServices
             'post_type' => $postType,
             'success_response' => $successResponseContent,
             'created_at' => time(),
-            'uid' => auth()->id()
+            'uid' => auth()->id(),
+            'relation' => $validator['relation']
         ]);
 
         return $templateId;
@@ -125,13 +127,21 @@ class TemplateServices
             $tempLate['post'] = [];
         }
 
-        foreach (json_decode($data['success_response'], 1) as $key => $item) {
-            $tempLate['successResponse'][] = [
-                'name' => $key,
-                'value' => $item
-            ];
-
+        $successResponse = json_decode($data['success_response'], 1);
+        if (count($successResponse) == count($successResponse, 1)) {
+            $successResponse = [$successResponse];
         }
+
+        foreach ($successResponse as $items) {
+            foreach ($items as $key => $item) {
+                $tempLate['successResponse'][] = [
+                    'name' => $key,
+                    'value' => $item
+                ];
+            }
+        }
+
+        $tempLate['relation'] = $data['relation'];
 
         return $tempLate;
     }
