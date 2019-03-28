@@ -1,8 +1,6 @@
 @extends('layouts.wide')
 
-@section('sidebar')
-    @parent
-@endsection
+@section('title','任务详情')
 
 @section('content')
     <div class="template-hd">

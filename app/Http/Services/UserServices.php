@@ -67,12 +67,13 @@ class UserServices
     {
         $list = TaskList::query()->where('task_list.uid', $userId)
             ->join('template_list', 'template_list.tid', '=', 'task_list.tid')
-            ->join('task_log', 'task_log.task_id', '=', 'task_list.task_id')
             ->where('task_list.is_delete', 0)
-            ->where('task_log.is_success', 1)
-            ->orderBy('task_log.executed_at', 'DESC')
             ->get()->toArray();
         foreach ($list as &$item) {
+            $item['taskLog'] = TaskLog::query()->where('task_id', $item['task_id'])
+                ->where('is_success', 1)
+                ->orderBy('executed_at', 'DESC')
+                ->first();
             $item['successCount'] = TaskLog::query()->where('is_success', 1)->where('task_id', $item['task_id'])->count();
             $item['failCount'] = TaskLog::query()->where('is_success', 0)->where('task_id', $item['task_id'])->count();
         }

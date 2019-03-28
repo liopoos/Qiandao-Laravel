@@ -24,7 +24,7 @@
                     <th><a href="/task/{{$item['task_id']}}">{{$item['task_id']}}</a></th>
                     <th><a href="/template/{{$item['tid']}}">{{$item['name']}}</a></th>
                     <th>{{date('Y-m-d H:i:s',$item['created_at'])}}</th>
-                    <th>{{date('Y-m-d H:i:s',$item['executed_at'])}}</th>
+                    <th>{{$item['taskLog']['executed_at']}}</th>
                     <th>{{$item['successCount']}}/{{$item['failCount']}}</th>
                     <th>{{number_format($item['successCount'] / $item['failCount'],2)}}</th>
                     <th><a href="/log/{{$item['task_id']}}">日志</a></th>
