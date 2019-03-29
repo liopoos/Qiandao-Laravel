@@ -33,7 +33,7 @@ class UserController extends Controller
             $data = $this->request->all();
             $taskId = UserServices::addTask($id, $data);
             if ($taskId) {
-                UserServices::action("添加任务，ID={$taskId}");
+                UserServices::action("添加任务，ID为{$taskId}");
 
                 return redirect("/task/{$taskId}");
             }
@@ -97,7 +97,7 @@ class UserController extends Controller
     {
         $userId = auth()->id();
         $result = array_first(UserServices::testTask($userId, $id));
-        UserServices::action("测试任务，ID={$id}并且" . ($result['result'] ? '成功' : '失败'));
+        UserServices::action("测试任务，ID为{$id}并且" . ($result['result'] ? '成功' : '失败'));
 
         return view('home.message', ['message' => $result['result'] ? '任务执行成功' : '任务执行失败']);
     }

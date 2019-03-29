@@ -13,7 +13,7 @@
             </div>
 
             <ul class="nav navbar-nav">
-                <li @if (getSidebarActiveIndex('index')) class="active"  @endif><a href="/index">主页</a></li>
+                <li @if (getSidebarActiveIndex('index')) class="active"  @endif><a href="/index">文档</a></li>
                 <li @if (getSidebarActiveIndex('list')) class="active"  @endif><a href="/list">模板列表 </a></li>
             </ul>
 
