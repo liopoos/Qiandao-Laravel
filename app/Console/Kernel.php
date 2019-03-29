@@ -30,7 +30,7 @@ class Kernel extends ConsoleKernel
         //          ->hourly();
         $schedule->call(function () {
             HomeServices::doTask();
-        })->everyTenMinutes();
+        })->twiceDaily(1, 13);
     }
 
     /**

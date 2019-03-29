@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Services\HomeServices;
 use App\Http\Services\TemplateServices;
+use App\Mail\SendMail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
 {
@@ -15,6 +17,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+
         return view('home.index');
     }
 

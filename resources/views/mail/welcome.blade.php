@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>测试</title>
+    <title>欢迎注册签到(Beta)</title>
     <style>
         body {
             margin: 0;
@@ -58,6 +58,7 @@
             background: white;
             border-collapse: collapse;
         }
+
         .email-body img {
             max-width: 100%;
         }
@@ -90,15 +91,15 @@
                 </tr>
                 <tr>
                     <td class="news-section">
-                        <h1>欢迎注册 Qiandao。</h1>
+                        <h1>欢迎注册签到(Beta)。</h1>
                         <a href="https://blog.codepen.io/documentation/pro-features/pro-teams/"></a>
-                        <p></p>
-                        <p><a href="https://codepen.io/signup/plans/">开始体验 &rarr;</a></p>
+                        <p>签到(Beta)是一个可以进行多个站点签到的开源程序，由PHP强力驱动，使用Laravel框架。</p>
+                        <p><a href="{{env('APP_URL','http://qiandao.mayuko.cn')}}">开始使用 &rarr;</a></p>
                     </td>
                 </tr>
                 <tr>
                     <td class="footer">
-                        您收到了这封邮件因为您在注册Qiandao，如果不是您的操作，请删除此邮件。
+                        您收到了这封邮件因为您正在注册签到(Beta)，如果这不是您的操作，请删除此邮件。
                     </td>
                 </tr>
             </table>

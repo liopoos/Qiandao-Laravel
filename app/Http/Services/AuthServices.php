@@ -10,7 +10,9 @@ namespace App\Http\Services;
 
 
 use App\Http\Models\UserList;
+use App\Mail\SendMail;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class AuthServices
 {
@@ -26,6 +28,8 @@ class AuthServices
             'password' => Hash::make($validator['password']),
             'created_at' => time()
         ]);
+
+        Mail::to($validator['email'])->send(new SendMail());
 
         return $user;
     }

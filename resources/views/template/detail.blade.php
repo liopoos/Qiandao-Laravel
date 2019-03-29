@@ -48,6 +48,6 @@
 @endsection
 
 @section('sidebar')
-    <p>⚠️ <kbd>Cookie</kbd>等样式字段需要在创建模板时替换。</p>
+    <p>⚠️ <kbd>Cookie</kbd>等样式字段需要在创建任务时替换。</p>
     <a href="/add/{{$tid}}" class="btn btn-default btn-block">创建任务</a>
 @endsection

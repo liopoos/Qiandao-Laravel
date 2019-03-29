@@ -59,4 +59,5 @@
             @endif
         @endforeach
     </ul>
+    <p>⚠️ 提交不会校验数据格式，请测试后再提交。</p>
 @endsection

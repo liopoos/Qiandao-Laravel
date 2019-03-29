@@ -57,8 +57,6 @@ class UserController extends Controller
             $title = '全部';
         }
 
-//        Mail::to('i@mayuko.cn')->send(new SendMail());
-
         return view('user.log', ['list' => $logList, 'title' => $title]);
     }
 
