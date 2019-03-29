@@ -1,6 +1,8 @@
 <ul class="list-group">
     @if(empty($data))
-        <p>无</p>
+        <li class="list-group-item">
+            <p>无</p>
+        </li>
     @else
         @foreach ($data as $item)
 

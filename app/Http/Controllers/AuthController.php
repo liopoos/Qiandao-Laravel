@@ -11,6 +11,7 @@ namespace App\Http\Controllers;
 
 
 use App\Http\Services\AuthServices;
+use App\Http\Services\UserServices;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -33,6 +34,8 @@ class AuthController extends Controller
             $credentials = $this->request->only('email', 'password');
 
             if (Auth::attempt($credentials)) {
+                UserServices::action('登录系统');
+
                 return redirect()->intended('dashboard');
             }
 
@@ -58,6 +61,7 @@ class AuthController extends Controller
             ])->validate();
 
             $userInfo = AuthServices::register($validator);
+            UserServices::action('注册系统');
 
             return redirect('dashboard');
         } else {
@@ -67,6 +71,9 @@ class AuthController extends Controller
 
     public function logout()
     {
+        UserServices::action('注销系统');
         Auth::logout();
+
+        return redirect('/');
     }
 }

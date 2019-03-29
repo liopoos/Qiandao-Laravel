@@ -20,7 +20,8 @@
         </div>
         <div class="form-group">
             <label for="exampleInputEmail1">HAR文件</label>
-            <textarea type="text" class="form-control" id="har-text" name="har-text" placeholder="请粘贴Charles的HAR文件，JSON格式"
+            <textarea type="text" class="form-control" id="har-text" name="har-text"
+                      placeholder="请粘贴Charles的HAR文件，JSON格式"
                       rows="8"
                       style="resize:none"></textarea>
         </div>
@@ -67,5 +68,4 @@
 @section('sidebar')
     <p><strong>💡 提示</strong></p>
     <p>需要粘贴来自Charles的HAR文件，如果没有Charles，也可以使用Chrome的De-Tool导出的HAR文件，但需要确认格式。</p>
-
 @endsection

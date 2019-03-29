@@ -13,6 +13,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class TemplateList extends Model
 {
+    public $timestamps = false;
+
     protected $table = 'template_list';
 
     protected $primaryKey = 'tid';
@@ -22,4 +24,9 @@ class TemplateList extends Model
     ];
 
     protected $hidden = ['is_valid'];
+
+    public function getCreatedAtAttribute($value)
+    {
+        return date('Y-m-d H:i:s', $value);
+    }
 }

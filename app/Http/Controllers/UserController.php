@@ -12,11 +12,6 @@ namespace App\Http\Controllers;
 use App\Http\Models\TemplateList;
 use App\Http\Services\TemplateServices;
 use App\Http\Services\UserServices;
-use App\Mail\SendMail;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Request;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -38,10 +33,15 @@ class UserController extends Controller
             $data = $this->request->all();
             $taskId = UserServices::addTask($id, $data);
             if ($taskId) {
+                UserServices::action('添加任务');
 
+                return redirect("/task/{$taskId}");
             }
         } else {
             $data = TemplateServices::getTemplateDetail($id);
+            if (!$data) {
+                return view('home.message', ['message' => '模板不存在']);
+            }
 
             return view('user.add', $data);
         }
@@ -65,7 +65,32 @@ class UserController extends Controller
         $userId = auth()->id();
         $taskData = UserServices::getTaskDetail($userId, $id);
 
+        if (count($taskData) == 0) {
+            return view('home.message', ['message' => '任务不存在']);
+        }
+
         return view('user.task', $taskData);
+    }
+
+    public function delete($type, $id)
+    {
+        $userId = auth()->id();
+        if ($type != 'task' && $type != 'template') {
+            $result = false;
+        } else {
+            $result = UserServices::delete($userId, $type, $id);
+        }
+        UserServices::action('删除' . (($type == 'task' ? '任务' : '模板')) . '并且' . (($result ? '成功' : '失败')));
+
+        return view('home.message', ['message' => $result ? '删除成功' : '删除失败']);
+    }
+
+    public function message()
+    {
+        $userId = auth()->id();
+        $list = UserServices::getAction($userId);
+
+        return view('home.message', ['list' => $list]);
     }
 
 }

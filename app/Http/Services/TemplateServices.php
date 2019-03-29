@@ -59,7 +59,7 @@ class TemplateServices
      */
     public static function getTemplateList($userId = 0)
     {
-        $list = TemplateList::query()->where('is_valid', 1);
+        $list = TemplateList::query()->where('is_valid', 1)->where('is_delete', 0);
 
         if ($userId) {
             $list->where('uid', $userId);
@@ -80,7 +80,7 @@ class TemplateServices
     public static function getTemplateDetail($id)
     {
         $tempLate = [];
-        $data = TemplateList::find($id);
+        $data = TemplateList::query()->where('is_valid', 1)->where('is_delete', 0)->first();
 
         if (!$data) {
             return [];

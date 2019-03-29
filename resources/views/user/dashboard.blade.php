@@ -16,7 +16,7 @@
                 <th>创建时间</th>
                 <th>上次成功执行时间</th>
                 <th>成功次数/失败次数</th>
-                <th>成功率</th>
+                <th>失败率</th>
                 <th>任务日志</th>
             </tr>
             @foreach($taskList as $item)
@@ -26,7 +26,13 @@
                     <th>{{date('Y-m-d H:i:s',$item['created_at'])}}</th>
                     <th>{{$item['taskLog']['executed_at']}}</th>
                     <th>{{$item['successCount']}}/{{$item['failCount']}}</th>
-                    <th>{{number_format($item['successCount'] / $item['failCount'],2)}}</th>
+                    <th>
+                        @if($item['failCount']+$item['successCount'] == 0)
+                            N/A
+                        @else
+                            {{number_format($item['failCount'] / ($item['failCount']+$item['successCount']),2)}}
+                        @endif
+                    </th>
                     <th><a href="/log/{{$item['task_id']}}">日志</a></th>
                 </tr>
             @endforeach
@@ -55,6 +61,7 @@
                     <th>{{$item['created_at']}}</th>
                     <th>{{$item['used_number']}}</th>
                     <th>{{$item['is_publish']?'是':'否'}}</th>
+                    <th><a href="/add/{{$item['tid']}}">创建任务</a></th>
                 </tr>
             @endforeach
         </table>

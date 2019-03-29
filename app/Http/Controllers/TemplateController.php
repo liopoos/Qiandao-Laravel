@@ -10,6 +10,7 @@ namespace App\Http\Controllers;
 
 
 use App\Http\Services\TemplateServices;
+use App\Http\Services\UserServices;
 use Illuminate\Support\Facades\Validator;
 
 class TemplateController extends Controller
@@ -39,6 +40,8 @@ class TemplateController extends Controller
             ])->validate();
             $templateId = TemplateServices::creatTemplate($validator);
             if ($templateId) {
+                UserServices::action('创建模板');
+
                 return redirect("/template/{$templateId}");
             }
         } else {
@@ -49,6 +52,9 @@ class TemplateController extends Controller
     public function detail($id)
     {
         $data = TemplateServices::getTemplateDetail($id);
+        if (!$data) {
+            return view('home.message', ['message' => '模板不存在']);
+        }
 
         return view('template.detail', $data);
     }

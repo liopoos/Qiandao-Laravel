@@ -9,6 +9,7 @@
 namespace App\Http\Services;
 
 
+use App\Http\Models\LogList;
 use App\Http\Models\TaskList;
 use App\Http\Models\TaskLog;
 use App\Http\Models\TemplateList;
@@ -68,6 +69,7 @@ class UserServices
         $list = TaskList::query()->where('task_list.uid', $userId)
             ->join('template_list', 'template_list.tid', '=', 'task_list.tid')
             ->where('task_list.is_delete', 0)
+            ->where('template_list.is_delete', 0)
             ->get()->toArray();
         foreach ($list as &$item) {
             $item['taskLog'] = TaskLog::query()->where('task_id', $item['task_id'])
@@ -81,9 +83,19 @@ class UserServices
         return $list;
     }
 
+    /**
+     * 获取任务详情
+     * @param $userId
+     * @param $taskId
+     * @return array
+     */
     public static function getTaskDetail($userId, $taskId)
     {
-        $data = TaskList::find($taskId);
+        $data = TaskList::query()->where('task_id', $taskId)->where('is_delete', 0)->first();
+
+        if (!$data) {
+            return [];
+        }
 
         $taskData = [];
         $taskData['creatTime'] = date('Y-m-d H:i:s', $data['created_at']);
@@ -99,6 +111,58 @@ class UserServices
         $templateData['task'] = $taskData;
 
         return $templateData;
+    }
+
+    /**
+     * 删除任务/模板
+     * @param $userId
+     * @param $type
+     * @param $id
+     * @return bool
+     */
+    public static function delete($userId, $type, $id)
+    {
+        switch ($type) {
+            case 'task':
+                $delete = TaskList::where('uid', $userId)->where('task_id', $id)->update(['is_delete' => 1]); //水平鉴权
+                break;
+            case 'template':
+                $delete = TemplateList::where('uid', $userId)->where('tid', $id)->update(['is_delete' => 1]);
+                break;
+            default:
+                break;
+        }
+
+        return $delete;
+    }
+
+    /**
+     * 用户执行日志
+     * @param $action
+     */
+    public static function action($action)
+    {
+        $userId = auth()->id();
+
+        LogList::insert([
+            'uid' => $userId,
+            'action' => $action,
+            'created_at' => time()
+        ]);
+    }
+
+    /**
+     * 获取用户的操作日志
+     * @param $userId
+     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public static function getAction($userId)
+    {
+        $list = LogList::query()->where('uid', $userId)
+            ->orderBy('created_at', 'DESC')
+            ->get();
+
+        return $list;
     }
 
 }

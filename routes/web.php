@@ -31,4 +31,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::any('add/{id}', 'UserController@add');
     Route::get('log/{id?}', 'UserController@log');
     Route::get('task/{id}', 'UserController@task');
+    Route::get('delete/{type}/{id}', 'UserController@delete');
+    Route::get('message', 'UserController@message');
 });
