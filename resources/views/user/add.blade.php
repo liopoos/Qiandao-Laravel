@@ -13,7 +13,9 @@
             <li class="list-group-item">{{$requestUrl}}</li>
         </ul>
         <h3>请求方式</h3>
-        <span class="label label-default">{{$requestMethod}}</span>
+        <ul class="list-group">
+            <li class="list-group-item">{{$requestMethod}}</li>
+        </ul>
         <h3>请求Header</h3>
         @component('component.listInput',['data'=>$headers,'prefix'=>'headers'])
         @endcomponent
@@ -25,6 +27,20 @@
         <h3>请求POST</h3>
         @component('component.listInput',['data'=>$post,'prefix'=>'post'])
         @endcomponent
+
+        <h3>成功响应</h3>
+        @foreach ($successResponse as $item)
+            <li class="list-group-item">
+                <p>
+                    <strong>{{$item['name']}}</strong>:
+                    {{$item['value']}}
+                </p>
+            </li>
+        @endforeach
+        <h3>关系</h3>
+        <li class="list-group-item">
+            {{$relation == 1?'所有的条件都需要满足 [与运算]':'只需要其中一个条件满足 [或运算]'}}
+        </li>
 
         <div class="template-btn">
             <button type="submit" class="btn btn-default btn-block">提交</button>
@@ -59,5 +75,5 @@
             @endif
         @endforeach
     </ul>
-    <p>⚠️ 提交不会校验数据格式，请测试后再提交。</p>
+    <p>⚠️ 提交不会校验数据格式，可以提交后自行测试。</p>
 @endsection

@@ -91,7 +91,9 @@ class UserServices
      */
     public static function getTaskDetail($userId, $taskId)
     {
-        $data = TaskList::query()->where('task_id', $taskId)->where('is_delete', 0)->first();
+        $data = TaskList::query()->where('task_id', $taskId)
+            ->where('uid', $userId)
+            ->where('is_delete', 0)->first();
 
         if (!$data) {
             return [];
@@ -134,6 +136,18 @@ class UserServices
         }
 
         return $delete;
+    }
+
+    /**
+     * 测试任务
+     * @param $taskId
+     * @return HomeServices|HomeServices[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public static function testTask($userId, $taskId)
+    {
+        $result = HomeServices::doTask($userId, $taskId);
+
+        return $result;
     }
 
     /**

@@ -47,7 +47,7 @@
 
         <h3>关系</h3>
         <li class="list-group-item">
-            {{$relation == 1?'所有的条件都需要满足 [&运算]':'只需要其中一个条件满足 [|运算]'}}
+            {{$relation == 1?'所有的条件都需要满足 [与运算]':'只需要其中一个条件满足 [或运算]'}}
         </li>
     </div>
 
@@ -57,4 +57,5 @@
     <p>⚠️ <font style="color: red">红色</font>的字段表示自定义的字段。</p>
     <p>目前暂不支持修改任务，如果任务错误，可以选择删除后重新添加。</p>
     <a href="/delete/task/{{$task['taskId']}}" class="btn btn-danger btn-block">删除任务</a>
+    <a href="/test/{{$task['taskId']}}" class="btn btn-default btn-block">测试任务</a>
 @endsection

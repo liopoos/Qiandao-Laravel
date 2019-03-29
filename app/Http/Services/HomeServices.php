@@ -11,19 +11,23 @@ namespace App\Http\Services;
 
 use App\Http\Models\TaskList;
 use App\Http\Models\TaskLog;
-use App\Http\Models\TemplateList;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use PHPUnit\Exception;
-use PHPUnit\Framework\Constraint\ExceptionCode;
 
 class HomeServices
 {
-    public static function doTask()
+    public static function doTask($userId = 0, $taskId = 0)
     {
         $taskList = TaskList::query()->where('is_valid', 1)
-            ->where('is_delete', 0)
-            ->get();
+            ->where('is_delete', 0);
+
+        if ($taskId > 0) {
+            $taskList->where('task_id', $taskId)
+                ->where('uid', $userId);
+        }
+
+        $taskList = $taskList->get();
 
         foreach ($taskList as &$item) {
             $item['result'] = self::request($item);
@@ -89,7 +93,7 @@ class HomeServices
         }
         $task->save();
 
-        return $result ? '执行成功' : '执行失败';
+        return $result;
     }
 
     /**
@@ -106,7 +110,7 @@ class HomeServices
             return false;
         }
 
-        $result = true;
+        $result = ($relation == 1) ? true : false;
         foreach ($templateResponse as $item) {
             //根据响应关系判断
             if ($relation == 1) {

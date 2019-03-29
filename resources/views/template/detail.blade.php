@@ -42,7 +42,7 @@
         @endforeach
         <h3>关系</h3>
         <li class="list-group-item">
-            {{$relation == 1?'所有的条件都需要满足 [&运算]':'只需要其中一个条件满足 [|运算]'}}
+            {{$relation == 1?'所有的条件都需要满足 [与运算]':'只需要其中一个条件满足 [或运算]'}}
         </li>
     </div>
 @endsection
