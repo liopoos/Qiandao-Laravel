@@ -22,9 +22,15 @@ class HomeServices
         $taskList = TaskList::query()->where('is_valid', 1)
             ->where('is_delete', 0);
 
-        if ($taskId > 0) {
-            $taskList->where('task_id', $taskId)
-                ->where('uid', $userId);
+        if ($taskId > 0 || $userId > 0) {
+            if ($taskId > 0) {
+                $taskList->where('task_id', $taskId)
+                    ->where('uid', $userId);
+            }
+
+            if ($userId > 0) {
+                $taskList->where('uid', $userId);
+            }
         }
 
         $taskList = $taskList->get();
@@ -80,11 +86,12 @@ class HomeServices
 
         if ($code == 200) {
             $body = $response->getBody()->getContents();
-            $task->response = $body;
             $result = self::checkResponse($templateData['successResponse'], $body, $templateData['relation']);
             if ($result) {
+                $task->response = $body;
                 $task->is_success = 1;
             } else {
+                $task->response = '';
                 $task->is_success = 0;
             }
         } else {

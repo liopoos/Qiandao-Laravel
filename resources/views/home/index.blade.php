@@ -23,7 +23,7 @@
     <ul>
         <li><strong>请求地址</strong> - 声明该条请求的请求地址</li>
         <li><strong>请求方式</strong> - 声明该条请求的请求方式（GET/POST/PUT等）</li>
-        <li><strong>请求Header</strong> - 很多请求需要携带自己的请求头部，大多是需要主意Cookie、Refer等</li>
+        <li><strong>请求Header</strong> - 很多请求需要携带自己的请求头部，大多是需要注意Cookie、Refer等</li>
         <li><strong>请求Query / GET</strong> - GET方式携带的字段</li>
         <li><strong>请求POST</strong> - POST方式携带的字段</li>
         <li><strong>响应字段</strong> - 请求后返回的响应字段，可以多个字段，需要指明各个字段的关系</li>

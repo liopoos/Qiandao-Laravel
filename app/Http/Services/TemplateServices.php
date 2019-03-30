@@ -80,7 +80,10 @@ class TemplateServices
     public static function getTemplateDetail($id)
     {
         $tempLate = [];
-        $data = TemplateList::query()->where('is_valid', 1)->where('is_delete', 0)->first();
+        $data = TemplateList::query()->where('tid', $id)
+            ->where('is_valid', 1)
+            ->where('is_delete', 0)
+            ->first();
 
         if (!$data) {
             return [];

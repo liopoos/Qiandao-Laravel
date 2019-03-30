@@ -22,7 +22,7 @@ Route::get('logout', 'AuthController@logout');
 Route::any('register', 'AuthController@register');
 
 Route::get('list', 'HomeController@list');
-Route::get('do', 'HomeController@do');
+Route::get('do/{id?}', 'HomeController@do');
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard', 'UserController@dashboard');

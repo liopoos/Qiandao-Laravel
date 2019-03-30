@@ -6,7 +6,7 @@
     <div class="dashboard-item">
         <div class="page-header">
             <h1>任务列表
-                <small>共{{count($taskList)}}个有效任务</small>
+                <small>共{{count($taskList)}}个有效任务 <a href="do/{{auth()->id()}}">立即执行</a> </small>
             </h1>
         </div>
         <table class="table">

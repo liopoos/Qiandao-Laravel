@@ -27,10 +27,17 @@ class HomeController extends Controller
         return view('template.list', ['list' => $list]);
     }
 
-    public function do()
+    public function do($id = 0)
     {
-        $task = HomeServices::doTask();
+        $authId = auth()->id();
+        if ($id > 0 && $authId == $id) {
+            $task = HomeServices::doTask($id);
 
-        return $task;
+            return $task;
+        }
+
+        return json_encode([
+            'result' => '认证错误'
+        ]);
     }
 }
