@@ -32,7 +32,6 @@ class AuthController extends Controller
             ])->validate();
 
             $credentials = $this->request->only('email', 'password');
-
             if (Auth::attempt($credentials)) {
                 AuthServices::creatToken($credentials['email']);
                 UserServices::action('登录系统');
@@ -40,7 +39,7 @@ class AuthController extends Controller
                 return redirect()->intended('dashboard');
             }
 
-            return 'fail';
+            return view('home.message', ['message' => '用户名或密码不正确']);
         } else {
             return view('auth.login');
         }
