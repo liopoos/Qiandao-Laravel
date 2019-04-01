@@ -40,4 +40,9 @@ class HomeController extends Controller
             'result' => '认证错误'
         ]);
     }
+
+    public function api()
+    {
+        return view('home.api');
+    }
 }

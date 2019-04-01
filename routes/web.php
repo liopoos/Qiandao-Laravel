@@ -22,7 +22,7 @@ Route::get('logout', 'AuthController@logout');
 Route::any('register', 'AuthController@register');
 
 Route::get('list', 'HomeController@list');
-Route::get('do/{id?}', 'HomeController@do');
+Route::get('api/doc', 'HomeController@api');
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard', 'UserController@dashboard');
@@ -34,9 +34,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('delete/{type}/{id}', 'UserController@delete');
     Route::get('message', 'UserController@message');
     Route::get('test/{id}', 'UserController@test');
+    Route::get('do/{id?}', 'HomeController@do');
 });
 
 
-Route::prefix('admin')->middleware(['middleware' => ['api']])->group(function () {
-
+Route::prefix('api')->middleware('apis')->group(function () {
+    Route::get('user', 'ApiController@user');
+    Route::get('task/list', 'ApiController@taskList');
+    Route::get('template/list', 'ApiController@templateList');
 });

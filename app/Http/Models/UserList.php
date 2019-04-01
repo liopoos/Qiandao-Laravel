@@ -24,9 +24,4 @@ class UserList extends Authenticatable
     protected $hidden = [
         'password',
     ];
-
-    public function getExpiredAtAttribute($value)
-    {
-        return date('Y-m-d H:i:s', $value);
-    }
 }

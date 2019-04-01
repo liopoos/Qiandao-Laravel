@@ -9,7 +9,7 @@
                 <small>用户ID:{{$userInfo['id']}}</small>
             </h1>
             <pre>{{$userInfo['token']}}</pre>
-            <p>使用API时，需要携带Access_Token字段进行验证，当前Access_Token将会在{{$userInfo['expired_at']}}过期。</p>
+            <p>使用API时，需要携带Access_Token字段进行验证，当前Access_Token将会在{{date('Y年m月d日',$userInfo['expired_at'])}}过期。</p>
         </div>
         <div class="page-header">
             <h1>任务列表

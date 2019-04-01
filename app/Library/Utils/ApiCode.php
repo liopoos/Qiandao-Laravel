@@ -2,24 +2,24 @@
 /**
  * Created by PhpStorm.
  * User: shaoshuai
- * Date: 2019-03-25
- * Time: 14:24
+ * Date: 2019-04-01
+ * Time: 11:52
  */
+
+namespace App\Library\Utils;
+
 
 class ApiCode
 {
     const SUCCESS = 1;
     const UNKNOWN_ERROR = 99999;
 
-    //详细分类错误
     const TMP_ERROR = 10001;
     const PARAM_ERROR = 10002;
     const AUTH_ERROR = 10003;
     const REQUEST_ERROR = 10004;
     const INVALID_USER = 10005;
     const PERMISSION_ERROR = 10006;
-
-    const MOMENT_NO_EXIST = 20001;
 
     protected $code;
 
@@ -33,7 +33,6 @@ class ApiCode
         self::REQUEST_ERROR => '请求错误',
         self::INVALID_USER => '用户不存在',
         self::PERMISSION_ERROR => '权限错误',
-        self::MOMENT_NO_EXIST => '时刻不存在',
     ];
 
     public function __construct($code, $msg = null)

@@ -37,13 +37,16 @@ class AuthServices
 
     public static function creatToken($email)
     {
-        $token = md5($email . Hash::make(rand(0, 1000)) . time());
-        $expireTime = Carbon::now()->addHour(72)->timestamp;
+        $userInfo = UserList::query()->where('email', $email)->first();
+        if (!($userInfo['token'] && $userInfo['expired_at'] > time())) {
+            $token = md5($email . Hash::make(rand(0, 1000)) . time());
+            $expireTime = Carbon::now()->addYear(10)->timestamp;
 
-        $user = UserList::query()->where('email', $email)
-            ->update([
-                'token' => $token,
-                'expired_at' => $expireTime
-            ]);
+            $user = UserList::query()->where('email', $email)
+                ->update([
+                    'token' => $token,
+                    'expired_at' => $expireTime
+                ]);
+        }
     }
 }

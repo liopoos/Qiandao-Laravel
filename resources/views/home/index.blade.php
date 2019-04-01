@@ -55,6 +55,9 @@
         <li>使用云监控（阿里云监控）请求<code>/do</code>。</li>
         <li>使用Crontab任务调度，可以参考Laravel<a href="https://learnku.com/docs/laravel/5.8/scheduling/3924#96da65" target="_blank">官方文档</a>。</li>
     </ol>
+    <h3 id="safe">安全性</h3>
+    <p>签到(Beta)的工作原理为模拟登录，而Cookie或Session是大多数网页的认证方式，所以当你提交Cookie时，服务器提供者会获取你账号一定的权限，所以如果你不放心提交的数据是否会被滥用，可以<code>clone</code>仓库，并部署在自己的服务器中。<a
+                href="https://learnku.com/docs/laravel/5.8/deployment/3884" target="_blank">Laravel文档</a>提供了Apache或Nginx的部署方式。</p>
 @endsection
 @section('sidebar')
     <ul>
@@ -75,6 +78,9 @@
         </li>
         <li>
             <a href="#extend">扩展性</a>
+        </li>
+        <li>
+            <a href="#safe">安全性</a>
         </li>
     </ul>
 @endsection
