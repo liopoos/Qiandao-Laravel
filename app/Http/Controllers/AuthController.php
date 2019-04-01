@@ -61,7 +61,6 @@ class AuthController extends Controller
             ])->validate();
 
             $userInfo = AuthServices::register($validator);
-            UserServices::action('注册系统');
 
             return redirect('dashboard');
         } else {
