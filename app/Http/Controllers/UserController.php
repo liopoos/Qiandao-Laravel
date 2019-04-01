@@ -20,10 +20,12 @@ class UserController extends Controller
         $userId = auth()->id();
         $taskList = UserServices::getTaskList($userId);
         $templateList = TemplateServices::getTemplateList($userId);
+        $userInfo = UserServices::getUserInfo($userId);
 
         return view('user.dashboard', [
             'taskList' => $taskList,
-            'templateList' => $templateList
+            'templateList' => $templateList,
+            'userInfo' => $userInfo
         ]);
     }
 

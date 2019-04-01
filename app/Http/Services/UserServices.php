@@ -13,10 +13,16 @@ use App\Http\Models\LogList;
 use App\Http\Models\TaskList;
 use App\Http\Models\TaskLog;
 use App\Http\Models\TemplateList;
+use App\Http\Models\UserList;
 use Carbon\Carbon;
 
 class UserServices
 {
+    public static function getUserInfo($userId)
+    {
+        return UserList::find($userId);
+    }
+
     public static function addTask($id, $data)
     {
         $userId = auth()->id();

@@ -5,8 +5,15 @@
 @section('content')
     <div class="dashboard-item">
         <div class="page-header">
+            <h1>Access_Token
+                <small>用户ID:{{$userInfo['id']}}</small>
+            </h1>
+            <pre>{{$userInfo['token']}}</pre>
+            <p>使用API时，需要携带Access_Token字段进行验证，当前Access_Token将会在{{$userInfo['expired_at']}}过期。</p>
+        </div>
+        <div class="page-header">
             <h1>任务列表
-                <small>共{{count($taskList)}}个有效任务 <a href="do/{{auth()->id()}}">立即执行</a> </small>
+                <small>共{{count($taskList)}}个有效任务 <a href="do/{{auth()->id()}}">立即执行</a></small>
             </h1>
         </div>
         <table class="table">

@@ -18,10 +18,15 @@ class UserList extends Authenticatable
     protected $table = 'user_list';
 
     protected $fillable = [
-        'username', 'email', 'password', 'created_at',
+        'username', 'email', 'password', 'created_at', 'expired_at', 'token',
     ];
 
     protected $hidden = [
-        'password', 'token',
+        'password',
     ];
+
+    public function getExpiredAtAttribute($value)
+    {
+        return date('Y-m-d H:i:s', $value);
+    }
 }

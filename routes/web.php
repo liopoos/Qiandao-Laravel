@@ -35,3 +35,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('message', 'UserController@message');
     Route::get('test/{id}', 'UserController@test');
 });
+
+
+Route::prefix('admin')->middleware(['middleware' => ['api']])->group(function () {
+
+});

@@ -34,6 +34,7 @@ class AuthController extends Controller
             $credentials = $this->request->only('email', 'password');
 
             if (Auth::attempt($credentials)) {
+                AuthServices::creatToken($credentials['email']);
                 UserServices::action('登录系统');
 
                 return redirect()->intended('dashboard');

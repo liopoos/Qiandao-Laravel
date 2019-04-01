@@ -11,6 +11,7 @@ namespace App\Http\Services;
 
 use App\Http\Models\UserList;
 use App\Mail\SendMail;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 
@@ -32,5 +33,17 @@ class AuthServices
         Mail::to($validator['email'])->send(new SendMail());
 
         return $user;
+    }
+
+    public static function creatToken($email)
+    {
+        $token = md5($email . Hash::make(rand(0, 1000)) . time());
+        $expireTime = Carbon::now()->addHour(72)->timestamp;
+
+        $user = UserList::query()->where('email', $email)
+            ->update([
+                'token' => $token,
+                'expired_at' => $expireTime
+            ]);
     }
 }
