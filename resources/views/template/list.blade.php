@@ -6,6 +6,7 @@
             <small>公开的模板列表</small>
         </h1>
     </div>
+    <h4>这里公开了一些常用的模板列表，点击即可查看详细信息。</h4>
     <ul class="list-group">
         <div class="list-group">
             @foreach($list as $item)

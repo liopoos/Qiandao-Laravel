@@ -51,7 +51,8 @@ class UserController extends Controller
 
     public function log($id = 0)
     {
-        $logList = UserServices::getTaskLog($id);
+        $userId = auth()->id();
+        $logList = UserServices::getTaskLog($userId, $id);
         if ($id) {
             $templateData = TemplateList::find($id);
             $title = $templateData['name'];

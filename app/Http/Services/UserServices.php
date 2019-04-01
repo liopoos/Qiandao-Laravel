@@ -49,9 +49,8 @@ class UserServices
      * @param $tid
      * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
      */
-    public static function getTaskLog($taskId)
+    public static function getTaskLog($userId, $taskId = 0)
     {
-        $userId = auth()->id();
         $logList = TaskList::query()
             ->where('task_list.uid', $userId)
             ->join('task_log', 'task_list.task_id', '=', 'task_log.task_id')

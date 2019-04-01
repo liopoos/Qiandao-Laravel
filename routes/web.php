@@ -42,4 +42,6 @@ Route::prefix('api')->middleware('apis')->group(function () {
     Route::get('user', 'ApiController@user');
     Route::get('task/list', 'ApiController@taskList');
     Route::get('template/list', 'ApiController@templateList');
+    Route::get('log/{id?}', 'ApiController@log');
+    Route::post('do/{id?}', 'ApiController@do');
 });
