@@ -1,1 +1,1 @@
-<p style="text-align: center;color: #999;margin: 30px 0;">PHP版本：{{PHP_VERSION}} | 操作系统：{{php_uname()}}</p>
+<p style="text-align: center;color: #999;margin: 30px 0;">PHP Ver {{PHP_VERSION}} | 签到(Beta) Ver {{config('app.version')}}</p>
