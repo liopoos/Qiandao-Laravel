@@ -62,7 +62,7 @@
                 href="https://learnku.com/docs/laravel/5.8/deployment/3884" target="_blank">Laravel文档</a>提供了Apache或Nginx的部署方式。</p>
 @endsection
 @section('sidebar')
-    <ul>
+    <ul class="visible-md-block">
         <li>
             <a href="#what">这是什么</a>
         </li>

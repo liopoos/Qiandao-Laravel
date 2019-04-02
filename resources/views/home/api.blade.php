@@ -32,7 +32,7 @@
 
 @endsection
 @section('sidebar')
-    <ul>
+    <ul class="visible-md-block">
         <li>
             <a href="#user">用户信息</a>
         </li>
