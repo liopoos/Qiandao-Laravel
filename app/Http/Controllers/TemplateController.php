@@ -25,8 +25,9 @@ class TemplateController extends Controller
                 'header-replace' => 'json',
                 'query-replace' => 'json',
                 'post-replace' => 'json',
-                'success-response' => 'required|json',
+                'success-response' => 'json',
                 'relation' => 'required',
+                'response-type' => 'required'
             ], [
                 'template-name.required' => '名称是必须的',
                 'template-desc.required' => '描述是必须的',
@@ -36,7 +37,7 @@ class TemplateController extends Controller
                 'query-replace.json' => '需要替换的Query字段不是有效的JSON格式',
                 'post-replace.json' => '需要替换的POST字段不是有效的JSON格式',
                 'success-response.json' => '成功的响应字段不是有效的JSON格式',
-                'success-response.required' => '成功的响应字段是必须的',
+                'response-type.required' => '响应类型是必须的'
             ])->validate();
             $templateId = TemplateServices::creatTemplate($validator);
             if ($templateId) {

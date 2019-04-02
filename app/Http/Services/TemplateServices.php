@@ -43,6 +43,7 @@ class TemplateServices
             'request_method' => $requestMethod,
             'request_url' => $requestUrl,
             'post_type' => $postType,
+            'response_type' => $validator['response-type'],
             'success_response' => $successResponseContent,
             'created_at' => time(),
             'uid' => auth()->id(),
@@ -106,7 +107,7 @@ class TemplateServices
             ];
         }
 
-        if (isset($harContent['log']['entries'][0]['request']['queryString'])) {
+        if (isset($harContent['log']['entries'][0]['request']['queryString']) && count($harContent['log']['entries'][0]['request']['queryString']) > 0) {
             foreach ($harContent['log']['entries'][0]['request']['queryString'] as $item) {
                 $tempLate['query'][] = [
                     'name' => $item['name'],
@@ -118,7 +119,7 @@ class TemplateServices
             $tempLate['query'] = [];
         }
 
-        if (isset($harContent['log']['entries'][0]['request']['postData']['params'])) {
+        if (isset($harContent['log']['entries'][0]['request']['postData']['params'])  && count($harContent['log']['entries'][0]['request']['postData']['params']) > 0) {
             foreach ($harContent['log']['entries'][0]['request']['postData']['params'] as $item) {
                 $tempLate['post'][] = [
                     'name' => $item['name'],
@@ -145,6 +146,7 @@ class TemplateServices
         }
 
         $tempLate['relation'] = $data['relation'];
+        $tempLate['response_type'] = $data['response_type'];
 
         return $tempLate;
     }

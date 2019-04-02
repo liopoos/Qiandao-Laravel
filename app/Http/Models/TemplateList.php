@@ -20,7 +20,7 @@ class TemplateList extends Model
     protected $primaryKey = 'tid';
 
     protected $fillable = [
-        'name', 'description', 'har_content', 'request_url', 'request_method', 'header_replace', 'query_replace', 'post_replace', 'success_response', 'created_at', 'post_type', 'relation'
+        'name', 'description', 'har_content', 'request_url', 'request_method', 'header_replace', 'query_replace', 'post_replace', 'success_response', 'created_at', 'post_type', 'relation', 'response_type'
     ];
 
     protected $hidden = ['is_valid'];

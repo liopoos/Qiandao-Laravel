@@ -47,6 +47,12 @@
                       style="resize:none">[]</textarea>
         </div>
         <div class="form-group">
+            <label for="relation">响应字段格式</label>
+            <select class="form-control" name="response-type">
+                <option value="1">JSON数据</option>
+            </select>
+        </div>
+        <div class="form-group">
             <label for="exampleInputEmail1">成功时的响应</label>
             <p>⚠️ 成功时的响应的某些字段，可以为多个相同字段，例如[{"code":200},{"code":100}]，JSON格式</p>
             <textarea type="text" class="form-control" id="success-response" name="success-response"
@@ -54,10 +60,11 @@
                       style="resize:none">{"code":200}</textarea>
         </div>
         <div class="form-group">
-            <label for="relation">成功响应字段关系</label>
+            <label for="relation">响应字段关系</label>
             <select class="form-control" name="relation">
                 <option value="1">所有的条件都需要满足</option>
                 <option value="2">只需要其中一个条件满足</option>
+                <option value="3">所有的条件都不需要满足</option>
             </select>
         </div>
         <button type="submit" class="btn btn-default btn-block">提交</button>

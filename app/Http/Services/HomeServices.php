@@ -86,7 +86,7 @@ class HomeServices
 
         if ($code == 200) {
             $body = $response->getBody()->getContents();
-            $result = self::checkResponse($templateData['successResponse'], $body, $templateData['relation']);
+            $result = self::checkResponse($templateData['successResponse'], $body, $templateData['relation'], $templateData['response_type']);
             if ($result) {
                 $task->response = $body;
                 $task->is_success = 1;
@@ -107,16 +107,20 @@ class HomeServices
      * 检查response是否成功
      * @param $templateResponse
      * @param $response
+     * @param $relation
+     * @param int $type
      * @return bool
      */
-    public static function checkResponse($templateResponse, $response, $relation)
+    public static function checkResponse($templateResponse, $response, $relation, $type = 1)
     {
+        if ($relation == 3) {
+            return true; //不验证类型直接返回
+        }
         try {
             $response = json_decode($response, 1);
         } catch (Exception $e) {
             return false;
         }
-
         $result = ($relation == 1) ? true : false;
         foreach ($templateResponse as $item) {
             //根据响应关系判断

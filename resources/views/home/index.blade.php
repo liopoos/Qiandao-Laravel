@@ -3,7 +3,7 @@
 @section('content')
     <div class="page-header">
         <h1>签到(Beta)
-            <small>Ver 1.0.0</small>
+            <small>Ver {{config('app.version')}}</small>
         </h1>
     </div>
     <h3 id="what">这是什么</h3>
@@ -14,7 +14,7 @@
         <li>了解使用Charles进行抓包方式</li>
         <li>了解HTTP协议和请求方式</li>
         <li>了解JSON</li>
-        <li>了解Cookie、UA等一些基本的请求HEADER和请求BODY体</li>
+        <li>了解Cookie、UA等一些基本的请求Header和请求Body体</li>
         <li>能够忍受炒鸡简单的界面和不怎么有逻辑性的操作</li>
     </ul>
     <p>没关系，签到(Beta)提供了一些基本的模板，可以直接使用。</p>
@@ -26,6 +26,7 @@
         <li><strong>请求Header</strong> - 很多请求需要携带自己的请求头部，大多是需要注意Cookie、Refer等</li>
         <li><strong>请求Query / GET</strong> - GET方式携带的字段</li>
         <li><strong>请求POST</strong> - POST方式携带的字段</li>
+        <li><strong>响应字段格式</strong> - 响应字段的格式，目前支持JSON格式</li>
         <li><strong>响应字段</strong> - 请求后返回的响应字段，可以多个字段，需要指明各个字段的关系</li>
         <li><strong>响应关系</strong> - 响应的字段之间的关系，支持与、或关系</li>
     </ul>
@@ -44,6 +45,7 @@
     <p>但是如果code为100的时候也表示签到成功（比如重复签到），你也可以填写两种code的情况：<code>[{"code":200},{"code":100}]</code>。填写完响应后，你需要指明两个code的关系，目前支持与、或的关系。从而确定是「所有条件都必须满足」还是「只满足一个条件」即可。
     </p>
     <p>⚠️ 除了模板名称和描述，所有的字段都需要<code>JSON</code>格式的数据，否则将提交失败。</p>
+    <p>⚠️ 如果一条响应是非JSON格式（HTML）或者不需要验证响应，可以在<strong>响应关系</strong>选择「所有的条件都<font color="red">不需要</font>满足」，这时系统将会认为所有的响应都是成功的。</p>
     <h3 id="task">任务</h3>
     <p>选择一个模板，然后可以创建该模板的任务。系统会在每天的凌晨1点钟和下午13点钟进行所有任务的签到，你可以在「仪表盘」中查看所有的任务和模板，同时，「日志」页面会显示所有任务的执行情况。</p>
     <p>除了「日志」，「消息」页面提供了你的日常操作。</p>

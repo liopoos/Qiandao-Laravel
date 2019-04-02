@@ -48,7 +48,7 @@
     <div class="dashboard-item">
         <div class="page-header">
             <h1>模板列表
-                <small>共{{count($templateList)}}个模板</small>
+                <small>共{{count($templateList)}}个模板 <a href="/creat">创建模板</a></small>
             </h1>
         </div>
         <table class="table">
@@ -63,7 +63,7 @@
             @foreach($templateList as $item)
                 <tr>
                     <th><a href="/template/{{$item['tid']}}">{{$item['tid']}}</a></th>
-                    <th>{{$item['name']}}</th>
+                    <th><a href="/template/{{$item['tid']}}">{{$item['name']}}</a></th>
                     <th>{{$item['description']}}</th>
                     <th>{{$item['created_at']}}</th>
                     <th>{{$item['used_number']}}</th>

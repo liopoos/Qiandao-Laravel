@@ -47,7 +47,13 @@
 
         <h3>关系</h3>
         <li class="list-group-item">
-            {{$relation == 1?'所有的条件都需要满足 [与运算]':'只需要其中一个条件满足 [或运算]'}}
+            @if($relation == 1)
+                所有的条件都需要满足
+            @elseif($relation == 2)
+                只需要其中一个条件满足
+            @else
+                所有的条件都不需要满足
+            @endif
         </li>
     </div>
 
