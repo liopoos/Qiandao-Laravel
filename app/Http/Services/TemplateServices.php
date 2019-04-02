@@ -94,6 +94,7 @@ class TemplateServices
         $queryReplaceContent = json_decode($data['query_replace'], 1);
         $postReplaceContent = json_decode($data['post_replace'], 1);
         $tempLate['tid'] = $data['tid'];
+        $tempLate['uid'] = $data['uid'];
         $tempLate['name'] = $data['name'];
         $tempLate['desc'] = $data['description'];
         $tempLate['requestUrl'] = $data['request_url'];

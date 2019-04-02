@@ -55,6 +55,8 @@
 
 @section('sidebar')
     <p>⚠️ <kbd>Cookie</kbd>等样式字段需要在创建任务时替换。</p>
-    <a href="/delete/template/{{$tid}}" class="btn btn-danger btn-block">删除模板</a>
+    @if(auth()->id() == $uid)
+        <a href="/delete/template/{{$tid}}" class="btn btn-danger btn-block">删除模板</a>
+    @endif
     <a href="/add/{{$tid}}" class="btn btn-default btn-block">创建任务</a>
 @endsection
