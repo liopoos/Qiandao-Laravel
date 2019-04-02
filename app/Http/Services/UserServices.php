@@ -47,7 +47,7 @@ class UserServices
     /**
      * 获取任务日志
      * @param $tid
-     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
     public static function getTaskLog($userId, $taskId = 0)
     {
@@ -59,7 +59,7 @@ class UserServices
             $logList->where('task_list.task_id', $taskId);
         }
         $logList->orderBy('task_log.executed_at', 'DESC');
-        $logList = $logList->get();
+        $logList = $logList->paginate(20);
 
         return $logList;
     }
@@ -173,13 +173,13 @@ class UserServices
     /**
      * 获取用户的操作日志
      * @param $userId
-     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
     public static function getAction($userId)
     {
         $list = LogList::query()->where('uid', $userId)
             ->orderBy('created_at', 'DESC')
-            ->get();
+            ->paginate(20);
 
         return $list;
     }

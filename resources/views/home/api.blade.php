@@ -10,18 +10,20 @@
     <h3 id="user">用户信息</h3>
     <p>用于获取用户信息。</p>
     <p>请求方式: <code>GET</code></p>
-    <p>请求地址 :<code>/api/user</code></p>
+    <p>请求地址: <code>/api/user</code></p>
     <h3 id="template">模板列表</h3>
     <p>用于获取用户创建的模板。</p>
     <p>请求方式: <code>GET</code></p>
-    <p>请求地址 :<code>/template/list</code></p>
+    <p>请求地址: <code>/template/list</code></p>
     <h3 id="task">任务列表</h3>
     <p>用于获取用户创建的任务。</p>
     <p>请求方式: <code>GET</code></p>
-    <p>请求地址 :<code>/task/list</code></p>
+    <p>请求地址: <code>/task/list</code></p>
     <h3 id="log">任务日志</h3>
     <p>用于获取任务的日志，当{任务id}为空时，将获取用户下所有的任务日志。</p>
     <p>请求方式: <code>GET</code></p>
+    <p>请求参数: </p>
+    <pre>page: 分页数</pre>
     <p>请求地址 :<code>/log/{任务id}</code></p>
     <h3 id="do">执行任务</h3>
     <p>用户执行某个任务，当{任务id}为空时，将执行用户下所有的任务。</p>

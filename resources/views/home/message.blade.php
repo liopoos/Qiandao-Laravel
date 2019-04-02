@@ -23,5 +23,6 @@
                 </tr>
             @endforeach
         </table>
+        <div class="log-nav">{{ $list->links() }}</div>
     @endif
 @endsection
