@@ -88,7 +88,9 @@ class HomeServices
             $body = $response->getBody()->getContents();
             $result = self::checkResponse($templateData['successResponse'], $body, $templateData['relation'], $templateData['response_type']);
             if ($result) {
-                $task->response = $body;
+                if ($templateData['relation'] != 3) {
+                    $task->response = $body;
+                }
                 $task->is_success = 1;
             } else {
                 $task->response = '';
