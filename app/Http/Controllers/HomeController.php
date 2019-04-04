@@ -18,6 +18,10 @@ class HomeController extends Controller
      */
     public function index()
     {
+        if(auth()->check()){
+            return (new UserController)->dashboard();
+        }
+
         return view('home.index');
     }
 

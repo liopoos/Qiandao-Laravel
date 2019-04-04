@@ -36,7 +36,7 @@ class HomeServices
         $taskList = $taskList->get();
 
         foreach ($taskList as &$item) {
-            $item['result'] = self::request($item);
+            $item['result'] = self::request($item) ? true : false;
         }
 
         return $taskList;
@@ -52,7 +52,10 @@ class HomeServices
         $templateData = TemplateServices::getTemplateDetail($taskData['tid']);
         $taskReplaceContent = json_decode($taskData['replace_content'], 1);
         $result = false;
-
+        //若模板不存在则返回false
+        if (empty($templateData)) {
+            return $result;
+        }
         $headers = self::getReplace('headers', $templateData, $taskReplaceContent['headers']);
         $query = self::getReplace('query', $templateData, $taskReplaceContent['query']);
         $post = self::getReplace('post', $templateData, $taskReplaceContent['post']);
