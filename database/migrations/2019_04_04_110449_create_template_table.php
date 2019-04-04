@@ -13,7 +13,7 @@ class CreateTemplateTable extends Migration
      */
     public function up()
     {
-        Schema::create('template', function (Blueprint $table) {
+        Schema::create('template_list', function (Blueprint $table) {
             $table->bigIncrements('tid');
             $table->integer('uid');
             $table->string('name', 255);
@@ -44,6 +44,6 @@ class CreateTemplateTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('template');
+        Schema::dropIfExists('template_list');
     }
 }

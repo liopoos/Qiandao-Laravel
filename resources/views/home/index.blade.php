@@ -45,7 +45,8 @@
     <p>但是如果code为100的时候也表示签到成功（比如重复签到），你也可以填写两种code的情况：<code>[{"code":200},{"code":100}]</code>。填写完响应后，你需要指明两个code的关系，目前支持与、或的关系。从而确定是「所有条件都必须满足」还是「只满足一个条件」即可。
     </p>
     <p>⚠️ 除了模板名称和描述，所有的字段都需要<code>JSON</code>格式的数据，否则将提交失败。</p>
-    <p>🧨️ 如果一条响应是非JSON格式（HTML）或者不需要验证响应，可以在<strong>响应关系</strong>选择「所有的条件都<font color="red">不需要</font>满足」，这时系统将会认为所有的响应都是成功的。</p>
+    <p>🧨️ 如果一条响应是非JSON格式（HTML）或者不需要验证响应，可以在<strong>响应关系</strong>选择「所有的条件都<font color="red">不需要</font>满足」，这时系统将会认为所有的响应都是成功的。
+    </p>
     <h3 id="task">任务</h3>
     <p>选择一个模板，然后可以创建该模板的任务。系统会在每天的凌晨1点钟和下午13点钟进行所有任务的签到，你可以在「仪表盘」中查看所有的任务和模板，同时，「日志」页面会显示所有任务的执行情况。</p>
     <p>除了「日志」，「消息」页面提供了你的日常操作。</p>
@@ -58,12 +59,28 @@
     <p>目前签到(Beta)提供了两种任务调度的方法：</p>
     <ol>
         <li>使用云监控（阿里云监控）请求API文档中的<code>/do</code>。</li>
-        <li>使用Crontab任务调度，可以参考Laravel<a href="https://learnku.com/docs/laravel/5.8/scheduling/3924#96da65" target="_blank">官方文档</a>。👈推荐</li>
+        <li>使用Crontab任务调度，可以参考Laravel<a href="https://learnku.com/docs/laravel/5.8/scheduling/3924#96da65"
+                                        target="_blank">官方文档</a>。👈推荐
+        </li>
     </ol>
     <h3 id="safe">安全性</h3>
     <p>🔒 签到(Beta)的工作原理为模拟登录，而Cookie或Session是大多数网页的认证方式，所以当你提交Cookie时，服务器提供者会获取你账号一定的权限，所以如果你不放心提交的数据是否会被滥用，可以<a
-                    href="https://github.com/mayuko2012/Qiandao-Laravel" target="_blank">Clone</a>仓库，并部署在自己的服务器中。<a
-                href="https://learnku.com/docs/laravel/5.8/deployment/3884" target="_blank">Laravel文档</a>提供了Apache或Nginx的部署方式。</p>
+                href="https://github.com/mayuko2012/Qiandao-Laravel" target="_blank">Clone</a>仓库，并部署在自己的服务器中。<a
+                href="https://learnku.com/docs/laravel/5.8/deployment/3884" target="_blank">Laravel文档</a>提供了Apache或Nginx的部署方式。
+    </p>
+    <h3 id="deploy">部署到服务器</h3>
+    <p>如果你尝试过安装Laravel，那么你将会很快的安装本程序，如果没有安装过Laravel，可以从<a href="https://learnku.com/docs/laravel/5.8/installation/3879"
+                                                          target="_blank">官方文档</a>了解Laravel的安装方式。</p>
+    <p><strong>克隆项目</strong></p>
+    <p>你需要从仓库中<code>git clone</code>项目到你的本地目录：</p>
+    <pre>$ git clone https://github.com/mayuko2012/Qiandao-Laravel</pre>
+    <p><strong>修改.env文件</strong></p>
+    <p><code>.env</code>文件是Laravel的配置文件，你需要修改你的数据库连接信息等。可以从<code>cp .env.example .env</code>拷贝。</p>
+    <p><strong>创建数据表创建迁移</strong></p>
+    <p>之后，你需要新建数据表，Laravel的迁移将自动生成所需要的数据表：</p>
+    <pre>$ php artisan migrate</pre>
+    <p><strong>运行</strong></p>
+    <p>之后，你就可以像启动一个全新的Laravel项目一样运行签到(Beta)了。</p>
 @endsection
 @section('sidebar')
     <ul class="hidden-xs hidden-sm">
@@ -90,6 +107,9 @@
         </li>
         <li>
             <a href="#safe">安全性</a>
+        </li>
+        <li>
+            <a href="#deploy">部署到服务器</a>
         </li>
     </ul>
 @endsection
