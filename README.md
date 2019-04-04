@@ -80,3 +80,31 @@
 ### 安全性
 
 🔒 签到(Beta)的工作原理为模拟登录，而Cookie或Session是大多数网页的认证方式，所以当你提交Cookie时，服务器提供者会获取你账号一定的权限，所以如果你不放心提交的数据是否会被滥用，可以[Clone](https://github.com/mayuko2012/Qiandao-Laravel)仓库，并部署在自己的服务器中。[Laravel文档](https://learnku.com/docs/laravel/5.8/deployment/3884)提供了Apache或Nginx的部署方式。
+
+### 部署到服务器
+
+如果你尝试过安装Laravel，那么你将会很快的安装本程序，如果没有安装过Laravel，可以从[官方文档](https://learnku.com/docs/laravel/5.8/installation/3879)了解Laravel的安装方式。
+
+**克隆项目**
+
+你需要从仓库中`git clone`项目到你的本地目录
+
+```
+$ git clone https://github.com/mayuko2012/Qiandao-Laravel
+```
+
+**修改.env文件**
+
+`.env`文件是Laravel的配置文件，你需要修改你的数据库连接信息等。可以从`cp .env.example .env`拷贝。
+
+**创建数据表创建迁移**
+
+之后，你需要新建数据表，Laravel的迁移将自动生成所需要的数据表：
+
+```
+$ php artisan migrate
+```
+
+**运行**
+
+之后，你就可以像启动一个全新的Laravel项目一样运行签到(Beta)了。
