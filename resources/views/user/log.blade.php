@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="page-header">
-        <h1>日志
+        <h1>🧾 日志
             <small>{{$title}}</small>
         </h1>
     </div>
@@ -22,9 +22,9 @@
                 <th>{{date('Y-m-d H:i:s',$item['executed_at'])}}</th>
                 <th>
                     @if($item['is_success'] == 1)
-                        <span class="label label-success">成功</span>
+                        <span class="label">✔️</span>
                     @else
-                        <span class="label label-danger">失败</span>
+                        <span class="label">❌</span>
                     @endif
                 </th>
             </tr>

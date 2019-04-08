@@ -2,7 +2,7 @@
 @section('title','模板列表')
 @section('content')
     <div class="page-header">
-        <h1>模板列表
+        <h1>📑 模板列表
             <small>公开的模板列表</small>
         </h1>
     </div>

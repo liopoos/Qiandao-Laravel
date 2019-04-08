@@ -7,7 +7,7 @@
         <p>{{$message}}。</p>
     @else
         <div class="page-header">
-            <h1>消息</h1>
+            <h1>📨 消息</h1>
         </div>
         <table class="table">
             <tr>
